@@ -21,13 +21,17 @@ hash: SupportTwoFactorAuth
         Add your own favorite site by submitting a pull request on the
         <a href="https://github.com/2factorauth/twofactorauth">GitHub repo</a>.
     </div>
+     <div class="sub header search">
+        <label class="label" for="search">Search</label>
+        <input type="text" class="ui input" id="search" ng-model="main.search" ng-change="main.buildVisibilityMap()">
+    </div>
 </div>
 
 <div class="ui grid container">
         <div class="column">
 
         {% for section in site.data.main.sections %}
-            <div class="section" id="{{ section.id }}">
+            <div class="section" id="{{ section.id }}" ng-show='main.anyWebsiteShown("{{section.id}}")'>
                 <table class="ui celled unstackable table">
                     <thead>
                         <tr>
@@ -63,8 +67,7 @@ hash: SupportTwoFactorAuth
                             {% for website in section_file.websites %}
                                 {% assign current_name = website.name | downcase %}
                                 {% if lowercase_name == current_name %}
-
-                                    <tr>
+                                    <tr ng-show='main.websiteShown("{{section.id}}", "{{website.name | xml_escape}}")'>
                                         {% if website.tfa %}
                                             <td class="main positive">
                                             {% if website.img %}
@@ -110,7 +113,6 @@ hash: SupportTwoFactorAuth
                                                 <i class="checkmark large icon"></i>
                                             {% endif %}
                                             </td>
-                                        </tr>
                                         {% else %}
                                             <td class="main negative">
                                             {% if website.img %}
@@ -143,6 +145,7 @@ hash: SupportTwoFactorAuth
                                                 <td class="negative icon"><i class="remove large icon"></i></td>
                                             {% endif %}
                                         {% endif %}
+                                    </tr>
                                 {% endif %}
                             {% endfor %}
                         {% endfor %}

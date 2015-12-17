@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'github-pages', '~> 39'
 gem 'jekyll', '~> 2.4.0'
 gem 'kramdown', '~> 1.5.0'
+gem 'jekyll-angular'
 
 group :test do
   gem 'rake'

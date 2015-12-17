@@ -18,3 +18,5 @@ exclude:
     - README.md
     - Rakefile
     - verify.rb
+gems:
+  - jekyll-angular
